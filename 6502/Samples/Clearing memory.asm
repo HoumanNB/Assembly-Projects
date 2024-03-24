@@ -16,11 +16,11 @@ start:
 ; the entire RAM and TIA registers
 ;------------------------------------------------------------------------------------
     lda #0          ; a == 0
-    ldx #$ff        ; x == #$ff
+    ldx #$ff        ; x == $ff
 
 memloop:
     sta $0, X       ; store the memory value of a inside the memory addess $0 + X
-    dex             ;x--
+    dex             ; x--
     bne memloop     ; branch to loop untill x == 0 (z flag is set) 
 
 ;------------------------------------------------------------------------------------
