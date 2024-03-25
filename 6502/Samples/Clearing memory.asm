@@ -1,13 +1,16 @@
-    org $f000       ; define the core origin at $f000
+    PROCESSOR 6502
+
+    SEG code 
+    ORG $f000       ; define the core origin at $f000
 
 start:
     ; "housekeeping" (enabling and disabling things
     ;  in the proccesor to set it to right values)
 
-    sei             ; diasble intrupt
-    cld             ; disable the BCD decimal math mode
-    ldx #$ff        ; load the x register with #$ff
-    txs             ; transfer the x register to the stack pointer
+    SEI             ; diasble intrupt
+    CLD             ; disable the BCD decimal math mode
+    LDX #$ff        ; load the x register with #$ff
+    TXS             ; transfer the x register to the stack pointer
                     ; loading the x with #$ff and transfering it to the stack pointer
                     ;so to make it the start of the stack (forcing the stack pointer 
                     ;to have that value)
@@ -15,13 +18,13 @@ start:
 ; clear the page zero region ($00 to $ff)
 ; the entire RAM and TIA registers
 ;------------------------------------------------------------------------------------
-    lda #0          ; a == 0
-    ldx #$ff        ; x == $ff
+    LDA #0          ; a == 0
+    LDX #$ff        ; x == $ff
 
 memloop:
-    sta $0, X       ; store the memory value of a inside the memory addess $0 + X
-    dex             ; x--
-    bne memloop     ; branch to loop untill x == 0 (z flag is set) 
+    STA $0, X       ; store the memory value of a inside the memory addess $0 + X
+    DEX             ; x--
+    BNE memloop     ; branch to loop untill x == 0 (z flag is set) 
 
 ;------------------------------------------------------------------------------------
 ; filling the ROM size to exactly 4KB

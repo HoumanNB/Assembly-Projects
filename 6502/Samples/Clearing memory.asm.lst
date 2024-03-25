@@ -1,0 +1,37 @@
+------- FILE Clearing memory.asm LEVEL 1 PASS 2
+      1  10000					       PROCESSOR	6502
+      2  10000 ????
+      3  10000 ????				       SEG	code
+      4  f000					      ORG	$f000	; define the core origin at $f000
+      5  f000
+      6  f000				   start
+      7  f000							; "housekeeping" (enabling and disabling things
+      8  f000							;  in the proccesor to set it to right values)
+      9  f000
+     10  f000		       78		      SEI		; diasble intrupt
+     11  f001		       d8		      CLD		; disable the BCD decimal math mode
+     12  f002		       a2 ff		      LDX	#$ff	; load the x register with #$ff
+     13  f004		       9a		      TXS		; transfer the x register to the stack pointer
+     14  f005							; loading the x with #$ff and transfering it to the stack pointer
+     15  f005							;so to make it the start of the stack (forcing the stack pointer 
+     16  f005							;to have that value)
+     17  f005							;------------------------------------------------------------------------------------
+     18  f005							; clear the page zero region ($00 to $ff)
+     19  f005							; the entire RAM and TIA registers
+     20  f005							;------------------------------------------------------------------------------------
+     21  f005		       a9 00		      LDA	#0	; a == 0
+     22  f007		       a2 ff		      LDX	#$ff	; x == $ff
+     23  f009
+     24  f009				   memloop
+     25  f009		       85 00		      STA	$0, X	; store the memory value of a inside the memory addess $0 + X
+     26  f00b		       ca		      DEX		; x--
+     27  f00c		       d0 fb		      BNE	memloop	; branch to loop untill x == 0 (z flag is set) 
+     28  f00e
+     29  f00e							;------------------------------------------------------------------------------------
+     30  f00e							; filling the ROM size to exactly 4KB
+     31  f00e							; each .word is 2B of data
+     32  f00e							;------------------------------------------------------------------------------------
+     33  fffc					      org	$fffc	; going to ROM posision of $fffc (the last 4 bytes of the ROM)
+     34  fffc		       00 f0		      .word.w	start	; reset vector at $fffc (where the program starts)
+     35  fffe		       00 f0		      .word.w	start	; interrupt vector at $fffe (unused in the VCS)
+     36  10000
