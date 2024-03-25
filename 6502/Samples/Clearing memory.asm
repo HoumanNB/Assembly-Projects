@@ -22,7 +22,7 @@ start:
     LDX #$ff        ; x == $ff
 
 memloop:
-    STA $0, X       ; store the memory value of a inside the memory addess $0 + X
+    STA $0,X        ; store the memory value of a inside the memory addess $0 + X
     DEX             ; x--
     BNE memloop     ; branch to loop untill x == 0 (z flag is set) 
 

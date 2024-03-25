@@ -1,7 +1,7 @@
-------- FILE Clearing memory.asm LEVEL 1 PASS 2
-      1  10000					       PROCESSOR	6502
-      2  10000 ????
-      3  10000 ????				       SEG	code
+------- FILE Clearing memory.asm LEVEL 1 PASS 1
+      1  0000					      PROCESSOR	6502
+      2  0000 ????
+      3  0000 ????				      SEG	code
       4  f000					      ORG	$f000	; define the core origin at $f000
       5  f000
       6  f000				   start
@@ -23,7 +23,7 @@
      22  f007		       a2 ff		      LDX	#$ff	; x == $ff
      23  f009
      24  f009				   memloop
-     25  f009		       85 00		      STA	$0, X	; store the memory value of a inside the memory addess $0 + X
+     25  f009		       95 00		      STA	$0,X	; store the memory value of a inside the memory addess $0 + X
      26  f00b		       ca		      DEX		; x--
      27  f00c		       d0 fb		      BNE	memloop	; branch to loop untill x == 0 (z flag is set) 
      28  f00e
