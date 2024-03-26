@@ -20,10 +20,11 @@ start:
 ;------------------------------------------------------------------------------------
     LDA #0          ; a == 0
     LDX #$ff        ; x == $ff
+    STA $ff         ; make sure $ff is zeroed before the loop starts
 
 memloop:
-    STA $0,X        ; store the memory value of a inside the memory addess $0 + X
     DEX             ; x--
+    STA $0,X        ; store the memory value of a inside the memory addess $0 + X
     BNE memloop     ; branch to loop untill x == 0 (z flag is set) 
 
 ;------------------------------------------------------------------------------------
