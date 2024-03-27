@@ -6,14 +6,14 @@
  
 Start:
 ; TODO:
-; Load the A register with the literal decimal value 15
-; Transfer the value from A to X
-; Transfer the value from A to Y
-; Transfer the value from X to A
-; Transfer the value from Y to A
+LDA #15         ; Load the A register with the literal decimal value 15
+TAX             ; Transfer the value from A to X
+TAY             ; Transfer the value from A to Y
+TXA             ; Transfer the value from X to A
+TYA             ; Transfer the value from Y to A
  
-; Load X with the decimal value 6
-; Transfer the value from X to Y
+LDX #6          ; Load X with the decimal value 6
+TXY             ; Transfer the value from X to Y
  org $FFFC ; End the ROM by adding required values to memory position $FFFC
  .word Start ; Put 2 bytes with the reset address at memory position $FFFC
  .word Start ; Put 2 bytes with the break address at memory position $FFFE
